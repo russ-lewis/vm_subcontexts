@@ -170,6 +170,7 @@ MappedSubcontext* find_subcontext_by_addr(void *addr) {
 }
 
 int is_library_address(void *addr) {
+    // TODO: cache this
     FILE *maps_file = fopen("/proc/self/maps", "r");
     if (!maps_file)
         return 0;
