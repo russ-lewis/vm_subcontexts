@@ -163,6 +163,7 @@ int map_subcontext(const char *img_file) {
  * Basic helpers used by both the server and client libraries
  */
 int check_for_overlap(unsigned long start, unsigned long end) {
+    // TODO: cache this
     FILE *maps_file = fopen("/proc/self/maps", "r");
     if (!maps_file) {
         perror("Error opening /proc/self/maps");
@@ -188,6 +189,7 @@ int check_for_overlap(unsigned long start, unsigned long end) {
 
 int perms_to_prot(const char *perm) {
     int prot = 0;
+    // TODO: BUG: what if we have some but not all of the permissions?  Indices are incorrect.
     if (perm[0] == 'r') prot |= PROT_READ;
     if (perm[1] == 'w') prot |= PROT_WRITE;
     if (perm[2] == 'x') prot |= PROT_EXEC;
